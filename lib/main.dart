@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_bloc/cubit/counter_cubit.dart';
 import 'package:learn_flutter_bloc/stream/counter_stream.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  CounterStream counterStream = CounterStream(counter: 0);
+  CounterCubit counterCubit = CounterCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         ),
         body: Center(
           child: StreamBuilder(
-            stream: counterStream.stream,
+            stream: counterCubit.stream,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting)
                 return Text(
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (() {
-            counterStream.increment();
+            counterCubit.increment();
           }),
           child: Icon(Icons.add),
         ),
